@@ -38,6 +38,13 @@ jobs:
         sudo cp ./subdomain/app.mercyio.xyz/index.html /var/www/app.mercyio.xyz
         sudo systemctl restart nginx
 
+    - name: Secure the Nginx server
+      run: |
+        sudo apt update
+        sudo snap install --classic certbot
+        sudo certbot --version
+        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal
+
     - name: Set Up Firewall Rules
       run: |
         sudo ufw allow 80/tcp
@@ -45,12 +52,6 @@ jobs:
         sudo ufw allow 22/tcp
         sudo ufw enable    
 
-    - name: Secure the Nginx server
-      run: |
-        sudo apt update
-        sudo snap install --classic certbot
-        sudo certbot --version
-        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal
         
 
     
