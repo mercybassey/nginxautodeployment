@@ -42,8 +42,9 @@ jobs:
       run: |
         sudo apt update
         sudo snap install --classic certbot
+        sudo ln -s /snap/bin/certbot /usr/bin/certbot
         sudo certbot --version
-        sudo certbot --nginx -d 'app.mercyio.xyz' --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal
+        sudo certbot --nginx -d 'app.mercyio.xyz' --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal -v
 
     - name: Set Up Firewall Rules
       run: |
