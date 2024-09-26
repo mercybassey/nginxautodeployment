@@ -38,11 +38,11 @@ jobs:
         sudo systemctl nginx restart
 
     - name: Secure the Nginx server
-    run: |
-      sudo apt update
-      sudo snap install --classic certbot
-      sudo certbot --version
-      sudo certbot --nginx -d app.mercyio.xyz --agree-tos 
+      run: |
+        sudo apt update
+        sudo snap install --classic certbot
+        sudo certbot --version
+        sudo certbot --nginx -d app.mercyio.xyz --agree-tos 
 
     - name: Set Up Firewall Rules
       run: |
