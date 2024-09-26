@@ -31,10 +31,10 @@ jobs:
     - name: Secure the Nginx server
       run: |
         sudo apt update
-        sudo apt install snapd
         sudo snap install --classic certbot
         sudo certbot --version
-        sudo certbot --nginx -d blog.mercyio.xyz --agree-tos
+        sudo certbot --nginx -d blog.mercyio.xyz --agree-tos --email udohmercy911@gmail.com
+
 
     - name: Set Up Firewall Rules
       run: |
