@@ -1,63 +1,3 @@
-# name: Deploy Nginx
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-24.04
-
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v2
-
-#     - name: Install SSH Client
-#       run: sudo apt install -y openssh-client
-
-#     - name: Enable SSH commands execution
-#       uses: appleboy/ssh-action@v1.0.3
-#       with:
-#         host: ${{ secrets.SERVER_IP }}
-#         username: ${{ secrets.SERVER_USER }}
-#         key: ${{ secrets.SSH_PRIVATE_KEY }}
-#         passphrase: ${{ secrets.SSH_PASSPHRASE }}
-#         script: |
-#           sudo apt update
-#           sudo apt install -y nginx
-#           nginx -v
-#           sudo systemctl start nginx
-
-#     - name: Create Nginx virtual host
-#       run: |
-#         sudo cp ./subdomain/app.mercyio.xyz/app.mercyio.xyz.conf /etc/nginx/sites-available/
-#         sudo nginx -t 
-#         sudo ln -s /etc/nginx/sites-available/app.mercyio.xyz.conf /etc/nginx/sites-enabled/
-#         sudo mkdir -p /var/www/app.mercyio.xyz
-#         sudo cp ./subdomain/app.mercyio.xyz/index.html /var/www/app.mercyio.xyz
-#         sudo systemctl restart nginx
-
-#     - name: Secure the Nginx server
-#       run: |
-#         sudo apt update
-#         sudo snap install --classic certbot
-#         sudo certbot --version
-#         sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal
-
-#     - name: Set Up Firewall Rules
-#       run: |
-#         sudo ufw allow 80/tcp
-#         sudo ufw allow 443/tcp
-#         sudo ufw allow 22/tcp
-#         sudo ufw enable    
-
-        
-
-    
-    
-
-        
 name: Deploy Nginx
 
 on:
@@ -85,13 +25,14 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           sudo apt update
-          sudo apt install -y nginx
+          sudo apt install nginx -y 
+          nginx -v
           sudo systemctl start nginx
 
     - name: Create Nginx virtual host
       run: |
         sudo cp ./subdomain/app.mercyio.xyz/app.mercyio.xyz.conf /etc/nginx/sites-available/
-        sudo nginx -t  # Test the configuration first
+        sudo nginx -t 
         sudo ln -s /etc/nginx/sites-available/app.mercyio.xyz.conf /etc/nginx/sites-enabled/
         sudo mkdir -p /var/www/app.mercyio.xyz
         sudo cp ./subdomain/app.mercyio.xyz/index.html /var/www/app.mercyio.xyz
@@ -99,8 +40,10 @@ jobs:
 
     - name: Secure the Nginx server
       run: |
+        sudo apt update
         sudo snap install --classic certbot
-        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal
+        sudo certbot --version
+        sudo certbot --nginx -d 'app.mercyio.xyz' --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal
 
     - name: Set Up Firewall Rules
       run: |
@@ -110,4 +53,8 @@ jobs:
         sudo ufw enable    
 
         
-          
+
+    
+    
+
+        
