@@ -35,19 +35,30 @@ jobs:
         ls /etc/nginx/sites-available/
         sudo nginx -t 
         sudo ln -s /etc/nginx/sites-available/app.mercyio.xyz.conf /etc/nginx/sites-enabled/
-        sudo mkdir -p /usr/share/nginx/html/.well-known/acme-challenge
+        sudo mkdir -p /var/www/app.mercyio.xyz
         sudo cp ./subdomain/app.mercyio.xyz/index.html /var/www/app.mercyio.xyz
-        sudo systemctl restart nginx  
+        sudo systemctl restart nginx
 
     - name: Set Up Firewall Rules
       run: |
         sudo ufw allow 80/tcp
         sudo ufw allow 443/tcp
         sudo ufw allow 22/tcp
+    
 
     - name: Secure the Nginx server
       run: |
         sudo apt update
         sudo snap install --classic certbot
         sudo certbot --version
-        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email udohmercy911@gmail.com --non-interactive --force-renewal
+        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email udohmercy911@gmail.com --non-interactive --force-renewal --debug
+
+    
+    
+
+        
+      
+
+        
+        
+          
