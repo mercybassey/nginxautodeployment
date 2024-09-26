@@ -43,7 +43,7 @@ jobs:
         sudo apt update
         sudo snap install --classic certbot
         sudo certbot --version
-        sudo certbot --nginx -d app.mercyio.xyz --agree-tos 
+        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email udohmercy911@gmail.com
 
     - name: Set Up Firewall Rules
       run: |
