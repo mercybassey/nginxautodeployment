@@ -28,13 +28,21 @@ jobs:
           sudo apt install -y nginx
           nginx -v
 
-    - name: Secure the Nginx server
+    - name: Create Nginx virtual host
+      run: |
+        sudo cp ./subdomain/app.mercy.xyz/app.mercy.xyz.conf /etc/nginx/sites-available/
+        sudo nginx -t 
+        sudo ln -s /etc/nginx/sites-available/app.mercy.xyz.conf /etc/nginx/sites-enabled/
+        sudo mkdir -p /var/www/app.mercy.xyz
+        sudo cp ./subdomain/app.mercy.xyz/index.html /var/www/app.mercy.xyz
+        sudo systemctl nginx restart
+
+     - name: Secure the Nginx server
       run: |
         sudo apt update
         sudo snap install --classic certbot
         sudo certbot --version
-        sudo certbot --nginx -d blog.mercyio.xyz --agree-tos --email udohmercy911@gmail.com
-
+        sudo certbot --nginx -d app.mercyio.xyz --agree-tos 
 
     - name: Set Up Firewall Rules
       run: |
@@ -42,15 +50,7 @@ jobs:
         sudo ufw allow 443/tcp
         sudo ufw allow 22/tcp
     
-    - name: Create Nginx virtual host
-      run: |
-        sudo cp ./subdomain/blog.mercy.xyz/blog.mercy.xyz.conf /etc/nginx/sites-available/
-        sudo nginx -t 
-        sudo ln -s /etc/nginx/sites-available/blog.mercy.xyz.conf /etc/nginx/sites-enabled/
-        sudo mkdir -p /var/www/blog.mercy.xyz
-        sudo cp ./subdomain/blog.mercy.xyz/index.html /var/www/blog.mercy.xyz
-        sudo systemctl nginx restart
-
+    
 
         
       
