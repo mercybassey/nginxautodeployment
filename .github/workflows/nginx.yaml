@@ -32,7 +32,6 @@ jobs:
     - name: Create Nginx virtual host
       run: |
         sudo cp ./subdomain/app.mercyio.xyz/app.mercyio.xyz.conf /etc/nginx/sites-available/
-        ls /etc/nginx/sites-available/
         sudo nginx -t 
         sudo ln -s /etc/nginx/sites-available/app.mercyio.xyz.conf /etc/nginx/sites-enabled/
         sudo mkdir -p /var/www/app.mercyio.xyz
@@ -51,7 +50,8 @@ jobs:
         sudo apt update
         sudo snap install --classic certbot
         sudo certbot --version
-        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email udohmercy911@gmail.com --non-interactive --force-renewal --debug
+        sudo certbot --nginx -d app.mercyio.xyz --agree-tos --email mercybassey683@gmail.com --non-interactive --force-renewal
+        
 
     
     
