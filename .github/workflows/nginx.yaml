@@ -31,6 +31,7 @@ jobs:
     - name: Create Nginx virtual host
       run: |
         sudo cp ./subdomain/app.mercyio.xyz/app.mercyio.xyz.conf /etc/nginx/sites-available/
+        ls
         sudo nginx -t 
         sudo ln -s /etc/nginx/sites-available/app.mercyio.xyz.conf /etc/nginx/sites-enabled/
         sudo mkdir -p /var/www/app.mercyio.xyz
