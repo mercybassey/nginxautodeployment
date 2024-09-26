@@ -27,6 +27,7 @@ jobs:
           sudo apt update
           sudo apt install -y nginx
           nginx -v
+          sudo systemctl start nginx
 
     - name: Create Nginx virtual host
       run: |
@@ -36,7 +37,7 @@ jobs:
         sudo ln -s /etc/nginx/sites-available/app.mercyio.xyz.conf /etc/nginx/sites-enabled/
         sudo mkdir -p /usr/share/nginx/html/.well-known/acme-challenge
         sudo cp ./subdomain/app.mercyio.xyz/index.html /var/www/app.mercyio.xyz
-        sudo systemctl reload nginx  # Changed from restart to reload
+        sudo systemctl restart nginx  
 
     - name: Set Up Firewall Rules
       run: |
