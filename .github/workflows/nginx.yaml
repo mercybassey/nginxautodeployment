@@ -31,12 +31,12 @@ jobs:
     - name: Create Nginx virtual host
       run: |
         sudo cp ./subdomain/app.mercyio.xyz/app.mercyio.xyz.conf /etc/nginx/sites-available/
-        ls
+        ls /etc/nginx/sites-available/
         sudo nginx -t 
         sudo ln -s /etc/nginx/sites-available/app.mercyio.xyz.conf /etc/nginx/sites-enabled/
         sudo mkdir -p /var/www/app.mercyio.xyz
         sudo cp ./subdomain/app.mercyio.xyz/index.html /var/www/app.mercyio.xyz
-        sudo systemctl nginx restart
+        sudo systemctl restart nginx
 
     - name: Secure the Nginx server
       run: |
