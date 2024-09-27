@@ -89,6 +89,7 @@ jobs:
           nginx -v
           sudo systemctl start nginx
           sudo snap install --classic certbot
+          sudo ln -s /snap/bin/certbot /usr/bin/certbot
           sudo certbot --version
 
     - name: Create Nginx virtual host
