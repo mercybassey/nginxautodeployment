@@ -145,6 +145,7 @@ jobs:
           nginx -v
           sudo systemctl start nginx
           sudo apt remove certbot
+          sudo snap version
 
     - name: Create Nginx virtual host
       run: |
