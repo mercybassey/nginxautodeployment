@@ -140,14 +140,16 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
-          sudo apt update
-          sudo apt install nginx -y 
-          nginx -v
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nginx python3 python3-venv python3-pip libaugeas0
           sudo systemctl start nginx
-          sudo apt install python3 python3-venv libaugeas0
           sudo python3 -m venv /opt/certbot/
+          sudo /opt/certbot/bin/python3 -m ensurepip --upgrade
           sudo /opt/certbot/bin/pip install --upgrade pip
           sudo /opt/certbot/bin/pip install certbot certbot-nginx
+          if [ -L /usr/bin/certbot ]; then
+            sudo rm /usr/bin/certbot
+          fi
           sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot
           sudo certbot --version
 
