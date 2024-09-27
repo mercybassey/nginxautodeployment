@@ -144,8 +144,10 @@ jobs:
           sudo apt install nginx -y 
           nginx -v
           sudo systemctl start nginx
-          sudo apt remove certbot
-          sudo snap version
+          sudo snap install --classic certbot
+          sudo ln -s /snap/bin/certbot /usr/bin/certbot
+          export PATH=$PATH:/snap/bin
+          certbot --version
 
     - name: Create Nginx virtual host
       run: |
